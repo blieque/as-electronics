@@ -1,0 +1,21 @@
+{% include header.html %}
+
+<header>
+    <a href="{{ site.address }}{{ site.baseurl }}"><h3>{{ site.title }}</h3></a>
+    <h1>{{ page.title }}</h1>
+    <div>
+        <a href="mailto:{{ site.email }}">
+            <svg width="16" height="11">
+                <path d="M1 1.5l7 5l7 -5" />
+                <path d="M1 10l5 -3.5m4 0l5 3.5" />
+                <rect x=".5" y=".5" width="15" height="10" rx=".5" ry=".5"/>
+            </svg>
+            {{ site.author }}
+        </a>
+    </div>
+</header>
+<section>
+    {{ content }}
+</section>
+
+{% include footer.html %}

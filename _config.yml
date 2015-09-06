@@ -1,0 +1,16 @@
+# site settings
+title: AS Electronics
+author: Lucien Walters
+email: 143614@cirencester.ac.uk
+description: A collection of documents written for an Electronics AS-level course.
+
+address: "https://omni.dev"
+baseurl: "/as-electronics"
+
+# build settings
+markdown: kramdown
+destination: /srv/hosts/dev.omni/www/as-electronics
+sass:
+    style: compressed
+
+# these options are non-standard: author, email, address
