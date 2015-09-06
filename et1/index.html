@@ -6,7 +6,7 @@ layout: index
 {% assign limit = url_components.size | minus: 2 %}
 {% assign href = site.address | append: site.baseurl | append: '/' %}
 
-<nav>{% for i in (1..limit) %}{% assign limit_dec = limit | minus: 1 %}{% assign subcategory = url_components[i] | replace: '-' | upcase %}{% assign href = href | append: url_components[i] | append: '/' %}<a{% if i == limit_dec %} class="pre-last"{% endif %} href="{{ href }}">{{ subcategory }}</a>{% endfor %}</nav>
+<nav>{% for i in (1..limit) %}{% assign limit_dec = limit | minus: 1 %}{% assign subcategory = url_components[i] | replace: '-', ' ' | upcase %}{% assign href = href | append: url_components[i] | append: '/' %}<a{% if i == limit_dec %} class="pre-last"{% endif %} href="{{ href }}">{{ subcategory }}</a>{% endfor %}</nav>
 
 <!--
 <nav>
