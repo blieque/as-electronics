@@ -73,9 +73,8 @@ section
         overflow: hidden
 
         a
-            display: inline-block
+            float: left
             padding: $unit * 2 $unit * 3
-            position: relative
             color: $colour-off-black
             background: $colour-shade-light
             border-right: $unit * .5 solid $colour-shade
@@ -92,27 +91,10 @@ section
         .pre-last, a:last-child
             border-color: $colour-scheme-placebo-dark-blue
 
-        // a:after
-            content: ""
-            display: block
-            position: absolute
-            top: $unit * -1
-            right: $unit * -1.5
-            width: $unit * 2.5
-            height: 4em
-            background: $colour-shade-light
-            border-right: $unit * .5 solid $colour-shade
-            transform: rotate(22deg)
-            z-index: 1
+        // hover styles
 
-        // a:hover, a:hover:after
+        a:hover
             background: $colour-shade
 
-        // a:last-child:after
-            background: $colour-scheme-blue
-
-        // a:last-child:hover, a:last-child:hover:after
+        a:last-child:hover
             background: $colour-scheme-placebo-dark-blue
-
-        // .pre-last:after, a:last-child:after
-            border-right-color: $colour-scheme-placebo-dark-blue

@@ -13,4 +13,7 @@ destination: /srv/hosts/dev.omni/www/as-electronics
 sass:
     style: compressed
 
+compress_html:
+    clippings: all
+
 # these options are non-standard: author, email, address
