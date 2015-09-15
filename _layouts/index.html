@@ -7,8 +7,91 @@ layout: compress
 <header>
     <a href="{{ site.address }}{{ site.baseurl }}"><h1>{{ site.title }}</h1></a>
 </header>
-<section>
-    {{ content }}
+
+{% include breadcrumbs.html %}
+
+<section id="index">
+{% assign indexing_href = href %}
+
+{% comment %} SUBDIRECTORIES IN CURRENT DIRECTORY {% endcomment %}
+
+{% assign sub_categories = "" %}
+{% for page in site.pages %}
+    {% assign sub_url_components = page.url | split: '/' %}
+    {% assign sub_limit = sub_url_components.size | minus: 2 %}
+    {% assign sub_category_limit = url_components.size | minus: 1 %}
+    {% if sub_limit > limit and sub_url_components[limit] == url_components[limit] and sub_url_components[1] != "styles" %}
+        {% unless sub_at_least_one %}
+        <nav id="subdirectories">
+            <h3>SUBDIRECTORIES</h3>
+            <ul class="nav">
+            {% assign sub_at_least_one = "true" %}
+        {% endunless %}
+        {% assign sub_category = sub_url_components[sub_category_limit] %}
+        {% assign sub_categories_arr = sub_categories | split: split_string %}
+        {% for known_category in sub_categories_arr %}
+            {% if sub_category == known_category %}
+                {% assign is_previously_found = "true" %}
+            {% endif %}
+        {% endfor %}
+        {% unless is_previously_found == "true" %}
+            {% unless sub_categories.size == 0 %}
+                {% assign sub_categories = sub_categories | append: split_string %}
+            {% endunless %}
+            {% assign sub_categories = sub_categories | append: sub_category %}
+            {% assign sub_categories_arr = sub_categories | split: split_string %}
+        {% endunless %}
+        {% assign is_previously_found = "false" %}
+    {% endif %}
+{% endfor %}
+
+{% for category in sub_categories_arr %}
+    {% assign category_name = category | replace: '-',' ' | upcase %}
+    <li><a href="{{ sub_href }}{{ category }}">{{ category_name }}</a></li>
+{% endfor %}
+
+{% if sub_at_least_one %}
+    </ul></nav>
+{% endif %}
+
+{% comment %} PAGES IN CURRENT DIRECTORY {% endcomment %}
+
+{% for page in site.pages %}
+
+    {% assign page_url_components = page.url | split: '/' %}
+    {% assign page_limit = page_url_components.size | minus: 2 %}
+    {% assign pages_file_name = page_url_components | last %}
+
+    {% if page_limit == limit and page_url_components[limit] == url_components[limit] and pages_file_name != "index.html" %}
+        {% unless pages_at_least_one %}
+            <h2 class="top">PAGES</h2>
+            <nav id="pages">
+            {% assign pages_at_least_one = "true" %}
+        {% endunless %}
+        <a href="{{ pages_href }}{{ pages_file_name }}">{{ page.title }}</a>
+    {% endif %}
+{% endfor %}
+
+{% if pages_at_least_one %}
+    </nav>
+{% endif %}
+
+{% if content.size > 1 %}
+<h2 id="notes"{% unless pages_at_least_one %} class="top"{% endunless %}>NOTES</h2>
+<article>
+    {% assign content_copy = content %}
+    {% assign content_copy = content_copy | replace:'<h4','<h6' %}
+    {% assign content_copy = content_copy | replace:'</h4>','</h6>' %}
+    {% assign content_copy = content_copy | replace:'<h3','<h5' %}
+    {% assign content_copy = content_copy | replace:'</h3>','</h5>' %}
+    {% assign content_copy = content_copy | replace:'<h2','<h4' %}
+    {% assign content_copy = content_copy | replace:'</h2>','</h4>' %}
+    {% assign content_copy = content_copy | replace:'<h1','<h3' %}
+    {% assign content_copy = content_copy | replace:'</h1>','</h3>' %}
+    {{ content_copy }}
+</article>
+{% endif %}
+
 </section>
 
 {% include footer.html %}

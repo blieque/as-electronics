@@ -6,6 +6,26 @@
     >:last-child
         margin-bottom: 0
 
+=transition-all
+
+    -webkit-transition: all ease-out .1s
+    -moz-transition: all ease-out .1s
+    -o-transition: all ease-out .1s
+    transition: all ease-out .1s
+
+=border-box
+
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+=clear-fix
+
+    &:after
+        content: ''
+        display: block
+        clear: both
+
 body
     margin: 0
     padding: $unit * 6 $unit * 2
@@ -15,14 +35,17 @@ body
     +child-vertical-margins
 
 header, section, footer
-    margin: $unit * 4 auto
     padding: $unit * 4
-    width: 9cm
+    +border-box
+
+    +child-vertical-margins
+
+header, body > nav, section, footer
+    margin: $unit * 4 auto
+    width: 20cm
     min-width: 60%
     max-width: 100%
     background: #fff
-
-    +child-vertical-margins
 
 header
     position: relative
@@ -30,7 +53,6 @@ header
     background: $colour-scheme-blue
     font-family: $type-titles
     text-transform: uppercase
-    // box-shadow: inset $unit 0 0 0 $colour-scheme-placebo-dark-blue
     border-bottom: $unit solid $colour-scheme-placebo-dark-blue
 
     a
@@ -47,7 +69,7 @@ header
         a
             color: $colour-scheme-dark-blue
             text-decoration: none
-            transition: all ease-out .1s
+            +transition-all
 
             &:hover
                 padding-right: $unit
@@ -65,36 +87,95 @@ header
                 path
                     stroke-width: 1.18px
 
-section
+body > nav
+    margin: $unit * 4 auto $unit * -2
+    font-family: $type-titles
 
-    > nav:first-child
-        margin: $unit * -4 $unit * -4 0
-        font-family: $type-titles
-        overflow: hidden
-
-        a
-            float: left
-            padding: $unit * 2 $unit * 3
-            color: $colour-off-black
-            background: $colour-shade-light
-            border-right: $unit * .5 solid $colour-shade
-            font-weight: normal
-            text-decoration: none
-
-        a:first-child
-            padding-left: $unit * 4
-
+    &.colour
         a:last-child
             background: $colour-scheme-blue
-            font-weight: bold
 
         .pre-last, a:last-child
             border-color: $colour-scheme-placebo-dark-blue
 
-        // hover styles
-
-        a:hover
-            background: $colour-shade
-
         a:last-child:hover
             background: $colour-scheme-placebo-dark-blue
+
+    a
+        display: inline-block
+        padding: $unit * 2 $unit * 3
+        color: $colour-off-black
+        background: $colour-shade-light
+        border-right: $unit * .5 solid $colour-shade
+        font-weight: normal
+        text-decoration: none
+        +transition-all
+
+    a:first-child
+        padding-left: $unit * 4
+
+    a:last-child
+        font-weight: bold
+
+    // hover styles
+
+    a:hover
+        background: $colour-shade
+
+section
+
+    +clear-fix
+
+#index
+    padding-bottom: $unit
+
+    article
+        margin-bottom: $unit * 3
+        +child-vertical-margins
+
+#subdirectories
+    margin-bottom: $unit * 3
+    float: right
+    width: calc(33.33% - 4mm)
+    background: $colour-shade-light
+    // web designers love this one weird trick
+    overflow: hidden
+
+    h3
+        margin-top: 0
+        padding: $unit * 1 $unit * 2
+        background: $colour-shade
+
+    ul
+        margin: $unit * 2 0
+        padding: 0
+        list-style: none
+
+    a
+        display: block
+        padding: $unit $unit * 2
+        font-family: $type-titles
+        text-decoration: none
+        +transition-all
+
+        &:hover
+            background: $colour-shade
+
+#pages
+
+    margin-right: $unit * -3
+
+    a
+        display: inline-block
+        margin: 0 $unit * 3 $unit 0
+        width: calc(33.33% - 6mm)
+        +border-box
+
+        &:last-child
+            margin-bottom: $unit * 3
+
+.top
+    margin-top: 0
+
+.bottom
+    margin-bottom: 0
