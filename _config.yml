@@ -9,7 +9,6 @@ baseurl: "/as-electronics"
 
 # build settings
 markdown: kramdown
-destination: /srv/hosts/dev.omni/www/as-electronics
 sass:
     style: compressed
 
